@@ -1,5 +1,9 @@
+require('dotenv').config();
+const connectDB = require('./db');
 const express = require('express');
 const app = express();
+
+connectDB();
 
 app.use(express.json());
 
@@ -10,6 +14,6 @@ app.use('/expenses', expenseRoutes);
 app.get('/', (req, res) => {
     res.json({ message: 'Expense tracker API is running' });
 });
-app.listen(5000, ()=>{
-    console.log('Server running on port 5000')
+app.listen(process.env.PORT, ()=>{
+    console.log(`Server running on port ${process.env.PORT}`);
 });
