@@ -1,7 +1,7 @@
 function ExpenseItem({ expense, onDelete }) {
     const handleDelete = async () => {
         try{
-            await fetch(`/api/expenses/${expense_id}`, {
+            await fetch(`/api/expenses/${expense._id}`, {
                 method: 'DELETE'
             })
             onDelete(expense._id)

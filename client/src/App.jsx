@@ -7,23 +7,27 @@ import './App.css'
 function App(){
   const [expenses, setExpenses] = useState([])
 
-  useEffect(() =>{
+ useEffect(() => {
     const fetchExpenses = async () => {
-      try{
-        const response = await fetch('/api/expenses')
-        const data = await response.json()
-        setExpenses(data)
-      } catch(error) {
-        console.log('erro fetching expenses:', error)
-      }
+        try {
+            const response = await fetch('/api/expenses')
+            const data = await response.json()
+            setExpenses(data)
+        } catch(error) {
+            console.log('Error fetching expenses:', error)
+        }
     }
 
     fetchExpenses()
-  }, [])
+}, [])
 
-  const handleAdd =(newExpense) =>{
-    setExpenses([...expenses, newExpense])
-  }
+  const handleAdd = (newExpense) => {
+    setExpenses(prev => {
+        const exists = prev.find(e => e._id === newExpense._id)
+        if(exists) return prev
+        return [...prev, newExpense]
+    })
+}
   const handleDelete = (id) =>{
     setExpenses(expenses.filter((expense) => expense._id !==id))
   }
