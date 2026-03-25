@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import ExpenseForm from './components/ExpenseForm'
 import ExpenseList from './components/ExpenseList'
 import ExpenseTotal from './components/ExpenseTotal'
+import AISummary from './components/AISummary'
 import './App.css'
 
 function App(){
@@ -40,6 +41,7 @@ function App(){
     <div className="app">
         <h1>Expense Tracker</h1>
         <ExpenseTotal expenses={filteredExpenses} />
+        {/*<AISummary />*/} 
         
         <div className="filter-bar">
             <select 
