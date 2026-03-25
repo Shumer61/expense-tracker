@@ -8,7 +8,9 @@ connectDB();
 app.use(express.json());
 
 const expenseRoutes = require('./routes/expenses');
+const summaryRoute = require('./routes/summary');
 app.use('/expenses', expenseRoutes);
+app.use('/summary', summaryRoute);
 
 
 app.get('/', (req, res) => {
