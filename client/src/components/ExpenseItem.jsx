@@ -1,8 +1,9 @@
-function ExpenseItem({ expense, onDelete }) {
+function ExpenseItem({ expense, onDelete, token }) {
     const handleDelete = async () => {
         try{
             await fetch(`/api/expenses/${expense._id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: { Authorization: `Bearer ${token}` }
             })
             onDelete(expense._id)
         } catch(error) {

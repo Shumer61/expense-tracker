@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function ExpenseForm({ onAdd }) {
+function ExpenseForm({ onAdd, token }) {
   const [formData, setFormData] = useState({
     title: '',
     amount: '',
@@ -18,7 +18,9 @@ function ExpenseForm({ onAdd }) {
     try {
       const response = await fetch('/api/expenses', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',
+                   'Authorization': `Bearer ${token}`
+         },
         body: JSON.stringify(formData)
       })
 
@@ -50,6 +52,7 @@ function ExpenseForm({ onAdd }) {
         placeholder="Amount (KES)"
         value={formData.amount}
         onChange={handleChange}
+        onWheel={(e)  => e.target.blur()}
         required
       />
 
