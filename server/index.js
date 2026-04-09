@@ -5,6 +5,17 @@ const app = express();
 
 connectDB();
 
+const cors = require('cors');
+
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://expense-tracker-biro.onrender.com',
+    /\.vercel\.app$/
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 const expenseRoutes = require('./routes/expenses');
