@@ -1,7 +1,7 @@
 function ExpenseItem({ expense, onDelete, token }) {
     const handleDelete = async () => {
         try{
-            await fetch(`/api/expenses/${expense._id}`, {
+            await fetch(`${import.meta.env.VITE_API_URL}/expenses/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${token}` }
             })

@@ -18,7 +18,7 @@ useEffect(() => {
 
     const fetchExpenses = async () => {
         try {
-            const response = await fetch('/api/expenses', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
 

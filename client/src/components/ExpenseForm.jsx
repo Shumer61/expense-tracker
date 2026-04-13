@@ -16,7 +16,7 @@ function ExpenseForm({ onAdd, token }) {
     e.preventDefault()
 
     try {
-      const response = await fetch('/api/expenses', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',
                    'Authorization': `Bearer ${token}`
