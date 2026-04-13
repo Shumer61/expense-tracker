@@ -13,26 +13,26 @@ function AppContent() {
     const [selectedCategory, setSelectedCategory] = useState('all')
     const [showLogin, setShowLogin] = useState(true)
 
-useEffect(() => {
-    if(!token) return
+    useEffect(() => {
+        if(!token) return
 
-    const fetchExpenses = async () => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses`, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
+        const fetchExpenses = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
 
-            if(!response.ok) return
-            
-            const data = await response.json()
-            setExpenses(data)
-        } catch(error) {
-            console.log('Error fetching expenses:', error)
+                if(!response.ok) return
+
+                const data = await response.json()
+                setExpenses(data)
+            } catch(error) {
+                console.log('Error fetching expenses:', error)
+            }
         }
-    }
 
-    fetchExpenses()
-}, [token])
+        fetchExpenses()
+    }, [token])
 
     const handleAdd = (newExpense) => {
         setExpenses(prev => {
@@ -42,8 +42,19 @@ useEffect(() => {
         })
     }
 
-    const handleDelete = (id) => {
-        setExpenses(expenses.filter((expense) => expense._id !== id))
+    const handleDelete = async (id) => {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/expenses/${id}`, {
+                method: 'DELETE',
+                headers: { Authorization: `Bearer ${token}` }
+            })
+
+            if(!response.ok) return
+
+            setExpenses(expenses.filter((expense) => expense._id !== id))
+        } catch(error) {
+            console.log('Error deleting expense:', error)
+        }
     }
 
     const filteredExpenses = selectedCategory === 'all'
