@@ -77,6 +77,9 @@ function Login({ onSwitch }) {
                     <span onClick={onSwitch}>Register here</span>
                 </p>
             </div>
+            <p className="auth-switch" style={{ marginTop: '1rem', fontSize: '0.78rem', color: '#a0aec0' }}>
+    Demo: test@test.com / 123456
+</p>
         </div>
     )
 }
